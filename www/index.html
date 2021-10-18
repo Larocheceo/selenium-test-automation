@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Automatisches Test Webseite</title>
+	<meta charset="utf-8" />
+</head>
+
+<body>
+
+<h1>Geben Sie Ihre Daten ein</h1>
+
+<form method="post"  >
+	<fieldset>
+		<legend>Persönliche Daten</legend>
+		Sie sind :
+		<input type="radio" name="sexe" value="f"/> eine Frau
+		<input type="radio" name="sexe" value="h"/> ein Mann
+		<br /><br />
+		Name :
+		<input type="text" name="nom" required="required" /><br /><br />
+		Vorname :
+		<input type="text" name="prenom" /><br /><br />
+		Geburtsdatum :
+		<input type="date" name="naissance" /><br /><br />
+		Heimatsland :
+		<input name="pays" list="pays" />
+		<datalist id="pays">
+			<?php
+
+		include_once("TabPays.inc.php");
+		foreach($paysArray as $pays) {
+			echo "<option value=".$pays." />";
+			}
+
+			?>
+		</datalist>
+
+	</fieldset>
+
+	<br />
+	<input type="submit" name="submit" value="Bestätigen" />
+
+</form>
+</body>
+</html>
