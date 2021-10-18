@@ -10,11 +10,11 @@
 
 <h1>Geben Sie Ihre Daten ein</h1>
 
-<form method="post"  >
+<form method="post"  action="page1.html">
 	<fieldset>
 		<legend>Persönliche Daten</legend>
 		Sie sind :
-		<input type="radio" name="sexe" value="f"/> eine Frau
+		<input type="radio" name="sexe" value="f" class="user-name"/> eine Frau
 		<input type="radio" name="sexe" value="h"/> ein Mann
 		<br /><br />
 		Name :
@@ -26,20 +26,18 @@
 		Heimatsland :
 		<input name="pays" list="pays" />
 		<datalist id="pays">
-			<?php
-
-		include_once("TabPays.inc.php");
-		foreach($paysArray as $pays) {
-			echo "<option value=".$pays." />";
-			}
-
-			?>
+			<option value="Allemagne"/>
+			<option value="Belgique" />
+			<option value="Chine" />
+			<option value="France" />
+			<option value="Maroc" />
+			<option value="Tunisie" />
 		</datalist>
 
 	</fieldset>
 
 	<br />
-	<input type="submit" name="submit" value="Bestätigen" />
+	<input type="submit" name="submit" value="Bestätigen" id="submit" />
 
 </form>
 </body>

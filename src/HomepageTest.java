@@ -1,16 +1,22 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.text.html.StyleSheet;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 class HomepageTest {
 	private WebDriver driver = null;
@@ -49,13 +55,44 @@ class HomepageTest {
 	}
 
 	@Test
-	void testTitel() {
+	void testTitelIndexSeite() {
 		String projectDirectory = System.getProperty("user.dir");
-		//String projectDirectory = "C:\\Users\\Ready2Go\\Desktop\\ISFATES\\Semastre5_Isfates\\Java\\Selenium-HelloWorld";
 		String url = "file:///" + projectDirectory + "/www/index.html";
 		driver.get(url);
 		//driver.navigate().to(url);
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		assertEquals("Automatisches Test Webseite", driver.getTitle());
+	}
+
+	@Test
+	void testTitelPage1() {
+		String projectDirectory = System.getProperty("user.dir");
+		String url = "file:///" + projectDirectory + "/www/page1.html";
+		driver.get(url);
+		//driver.navigate().to(url);
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+		assertEquals("Persoenliche Informationen", driver.getTitle());
+	}
+
+	@Test
+	void testBestaetigenDruck() {
+		String projectDirectory = System.getProperty("user.dir");
+		String url = "file:///" + projectDirectory + "/www/index.html";
+		driver.get(url);
+		// Werte fuer 'required' Felder hinzufuegen
+		WebElement name = driver.findElement(By.className("user-name"));
+		name.sendKeys("Rochella Djouakeu Vofo");
+
+		WebElement element = driver.findElement(By.id("submit"));
+		element.click();
+		try {
+			WebElement el = new WebDriverWait(driver, 10).until(
+					ExpectedConditions.presenceOfElementLocated(By.id("header-text")));
+
+		} catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+		// Die Seite "Page1" soll angezeigt werden, falls auf dem Button gedruckt wird.
+		assertEquals("Persoenliche Informationen", driver.getTitle());
 	}
 }
