@@ -14,24 +14,24 @@
 	<fieldset>
 		<legend>Persönliche Daten</legend>
 		Sie sind :
-		<input type="radio" name="sexe" value="f" class="user-name"/> eine Frau
-		<input type="radio" name="sexe" value="h"/> ein Mann
+		<input type="radio" name="geschlecht" value="f"  id="weiblich"/> eine Frau
+		<input type="radio" name="geschlecht" value="m" id="mann"/> ein Mann
 		<br /><br />
 		Name :
-		<input type="text" name="nom" required="required" /><br /><br />
+		<input type="text" name="name" required="required" class="user-name" /><br /><br />
 		Vorname :
-		<input type="text" name="prenom" /><br /><br />
+		<input type="text" name="vorname" class="user-vorname"/><br /><br />
 		Geburtsdatum :
-		<input type="date" name="naissance" /><br /><br />
+		<input type="date" name="geburt" id="geburtsdatum"/><br /><br />
 		Heimatsland :
-		<input name="pays" list="pays" />
-		<datalist id="pays">
-			<option value="Allemagne"/>
-			<option value="Belgique" />
-			<option value="Chine" />
-			<option value="France" />
-			<option value="Maroc" />
-			<option value="Tunisie" />
+		<input name="land" list="land" />
+		<datalist id="land">
+			<option value="Deutschland"/>
+			<option value="Belgien" />
+			<option value="China" />
+			<option value="Frankreich" />
+			<option value="Moroco" />
+			<option value="Tunesien" />
 		</datalist>
 
 	</fieldset>

@@ -25,7 +25,7 @@ class HomepageTest {
 	void beforeEachTestCase() {
 		final boolean headless = false;
 		final boolean chrome = true;
-		if (chrome) {
+		/**if (chrome) {
 			System.setProperty("webdriver.chrome.driver", "./lib/chromedriver.exe");
 			if (headless) {
 				ChromeOptions options = new ChromeOptions();
@@ -35,8 +35,8 @@ class HomepageTest {
 				driver = new ChromeDriver();
 				driver.manage().window().maximize();
 			}
-		} else {
-			System.setProperty("webdriver.gecko.driver", "./lib/geckodriver.exe");
+		}else {*/
+		System.setProperty("webdriver.gecko.driver", "./lib/geckodriver.exe");
 			if (headless) {
 				FirefoxOptions options = new FirefoxOptions();
 				options.setHeadless(true);
@@ -45,7 +45,7 @@ class HomepageTest {
 				driver = new FirefoxDriver();
 				driver.manage().window().maximize();
 			}
-		}
+		//}
 	}
 
 	@AfterEach
@@ -86,7 +86,7 @@ class HomepageTest {
 		WebElement element = driver.findElement(By.id("submit"));
 		element.click();
 		try {
-			WebElement el = new WebDriverWait(driver, 10).until(
+			WebElement el = new WebDriverWait(driver, 20).until(
 					ExpectedConditions.presenceOfElementLocated(By.id("header-text")));
 
 		} catch (Exception e){
@@ -95,4 +95,26 @@ class HomepageTest {
 		// Die Seite "Page1" soll angezeigt werden, falls auf dem Button gedruckt wird.
 		assertEquals("Persoenliche Informationen", driver.getTitle());
 	}
+
+	@Test
+	void formular_soll_nicht_gesendet_werden_falls_keine_name_besteht() {
+		String projectDirectory = System.getProperty("user.dir");
+		String url = "file:///" + projectDirectory + "/www/index.html";
+		driver.get(url);
+
+		// Formular ausfuellen ohne Name
+		driver.findElement(By.id("weiblich")).click();
+		driver.findElement(By.className("user-vorname")).sendKeys("Rochella");
+		driver.findElement(By.id("geburtsdatum")).sendKeys("22/10/2022");
+		driver.findElement(By.name("land")).sendKeys("Frankreich");
+
+		// Wir schicken das Formular und warten ein bisschen
+		(driver.findElement(By.id("submit"))).click();
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+		// Wir prüfen, dass wir auf die gleiche Webseite bleiben
+		assertNotEquals("Persoenliche Informationen", driver.getTitle());
+	}
+
+
 }
