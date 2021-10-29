@@ -1,24 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
 	<title>Automatisches Test Webseite</title>
 	<meta charset="utf-8" />
+	<script>
+		function checkForm(form){
+			// Ein Geschlecht muss gewaehlt sein
+			if (!form.weiblich.checked && !form.mann.checked){
+				alert("Sie muessen unbedingt ein Geschlescht auswählen");
+			}
+			// Name muss mindestens zwei Buchstaben haben
+			let userName = (form.userName).value;
+			if((userName.trim()).length < 2){
+				alert ("Der Name muss aus mindestens 2 Buchstaben bestehen.!");
+			}
+
+			//
+
+		}
+
+	</script>
 </head>
 
 <body>
 
 <h1>Geben Sie Ihre Daten ein</h1>
 
-<form method="post"  action="page1.html">
+<form name="myForm">
 	<fieldset>
 		<legend>Persönliche Daten</legend>
 		Sie sind :
-		<input type="radio" name="geschlecht" value="f"  id="weiblich"/> eine Frau
-		<input type="radio" name="geschlecht" value="m" id="mann"/> ein Mann
+		<input type="radio" name="weiblich" value="f"  id="weiblich"/> eine Frau
+		<input type="radio" name="mann" value="m" id="mann"/> ein Mann
 		<br /><br />
 		Name :
-		<input type="text" name="name" required="required" class="user-name" /><br /><br />
+		<input type="text" name="userName" required="required" class="user-name" /><br /><br />
 		Vorname :
 		<input type="text" name="vorname" class="user-vorname"/><br /><br />
 		Geburtsdatum :
@@ -37,7 +54,7 @@
 	</fieldset>
 
 	<br />
-	<input type="submit" name="submit" value="Bestätigen" id="submit" />
+	<button type="button" name="submit" value="Bestätigen" id="submit" onclick="checkForm(myForm)"/>Bestaetigen</button>
 
 </form>
 </body>

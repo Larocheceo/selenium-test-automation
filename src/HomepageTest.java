@@ -79,12 +79,11 @@ class HomepageTest {
 		String projectDirectory = System.getProperty("user.dir");
 		String url = "file:///" + projectDirectory + "/www/index.html";
 		driver.get(url);
-		// Werte fuer 'required' Felder hinzufuegen
-		WebElement name = driver.findElement(By.className("user-name"));
-		name.sendKeys("Rochella Djouakeu Vofo");
 
-		WebElement element = driver.findElement(By.id("submit"));
-		element.click();
+		// Werte fuer 'required' Felder
+		driver.findElement(By.id("mann")).click();
+		driver.findElement(By.className("user-name")).sendKeys("Rochella Djouakeu Vofo");
+		driver.findElement(By.id("submit")).click();
 		try {
 			WebElement el = new WebDriverWait(driver, 20).until(
 					ExpectedConditions.presenceOfElementLocated(By.id("header-text")));
@@ -114,6 +113,16 @@ class HomepageTest {
 
 		// Wir prüfen, dass wir auf die gleiche Webseite bleiben
 		assertNotEquals("Persoenliche Informationen", driver.getTitle());
+	}
+
+	@Test
+	void das_land_muss_mit_den_vorgeschlagenen_laender_in_der_liste_stimmen() {
+		String projectDirectory = System.getProperty("user.dir");
+		String url = "file:///" + projectDirectory + "/www/index.html";
+		driver.get(url);
+
+		driver.findElement(By.id("land")).sendKeys("Kamerun");
+
 	}
 
 
