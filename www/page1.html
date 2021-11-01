@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Persoenliche Informationen</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <h1 id="header-text">Ihre persoenliche Informationen finden Sie hier</h1><br>
-  <a href="index.html">Zurueck kehren</a>
 
-
+<body class="color-page">
+  <h1 id ="nickname"></h1>
+  <h1 id="header-text">Sie haben den Durchlauf geschafft! Vielen Dank für den Besuch.</h1>
+  <p> Klicken Sie Auf den Link, um zurückzukehren.</p>
+  <a href="index.html">Zurück kehren</a>
+  <script>
+      let nickname = prompt("Eine kurze Frage. Haben Sie einen Spitznamen? Geben Sie es ein: ");
+      if(nickname.trim() !== null){
+          console.log(nickname);
+          (document.getElementById("nickname")).appendChild(document.createTextNode(nickname));
+          let nickname_ = document.createElement("p");
+          nickname_.appendChild(document.createTextNode(nickname));
+      }
+  </script>
 </body>
 </html>

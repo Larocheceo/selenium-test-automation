@@ -4,18 +4,59 @@
 <head>
 	<title>Automatisches Test Webseite</title>
 	<meta charset="utf-8" />
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		function checkForm(form){
+			let male =  document.getElementById("mann").checked;
+			let female = document.getElementById("weiblich").checked;
+			let formularOk = true;
 			// Ein Geschlecht muss gewaehlt sein
-			if (!form.weiblich.checked && !form.mann.checked){
+			if (!(female || male)){
 				alert("Sie muessen unbedingt ein Geschlescht auswählen");
+				formularOk = false;
+			} else if(female){
+				document.body.classList.add("weiblich");
+			} else {
+				document.body.classList.add("mann");
 			}
 			// Name muss mindestens zwei Buchstaben haben
 			let userName = (form.userName).value;
 			if((userName.trim()).length < 2){
-				alert ("Der Name muss aus mindestens 2 Buchstaben bestehen.!");
+				alert ("Der Name muss aus mindestens 2 Buchstaben bestehen!");
+				formularOk = false;
 			}
 
+			// Wir pruefen, ob das Land in den vorgegebenen Laender enethalten ist.
+			let laender = ["Deutschland", "Belgien", "China", "Frankreich", "Moroco", "Tunesien" ];
+			let land = (form.land).value;
+			if(laender.indexOf(land) === -1){
+				alert ("Waehlen Sie ein Land aus der Liste aus!");
+				formularOk = false;
+			}
+
+			// Link fuer naeschte Seite falls das Formular in Ordnung ist.
+			if(formularOk){
+				document.getElementById("form-section").classList.add("hide");
+				let text = document.createElement("h2");
+				let content = "";
+				let link = document.createElement("a");
+				link.innerHTML = "Weiter";
+				link.className="link";
+
+				if (female){
+					content = "Guten Tag Frau " + (form.userName).value + " !\n" +
+							"Hier ist der Louange Bereich. Drücken Sie auf \"weiter\" um auf der nächsten Seite zu gehen.";
+					link.href="page1.html";
+				} else{
+					content = "Guten Tag Herr " + (form.userName).value + " !\n" +
+							"Hier ist de Louanger Bereich. Drücken Sie auf \"weiter\" um auf der nächsten Seite zu gehen.";
+					link.href="page1.html";
+				}
+				text.appendChild(document.createTextNode(content)) ;
+				document.body.append(text);
+				document.body.append(link);
+			}
 			//
 
 		}
@@ -24,15 +65,16 @@
 </head>
 
 <body>
-
-<h1>Geben Sie Ihre Daten ein</h1>
-
+<section id="form-section">
+	<h1>Geben Sie Ihre Daten ein</h1>
 <form name="myForm">
 	<fieldset>
 		<legend>Persönliche Daten</legend>
 		Sie sind :
-		<input type="radio" name="weiblich" value="f"  id="weiblich"/> eine Frau
-		<input type="radio" name="mann" value="m" id="mann"/> ein Mann
+		<label for="weiblich"> eine Frau </label>
+		<input type="radio" name="geschlecht" value="f"  id="weiblich"/>
+		<label for="mann"> ein Mann </label>
+		<input type="radio" name="geschlecht" value="m" id="mann"/>
 		<br /><br />
 		Name :
 		<input type="text" name="userName" required="required" class="user-name" /><br /><br />
@@ -41,7 +83,7 @@
 		Geburtsdatum :
 		<input type="date" name="geburt" id="geburtsdatum"/><br /><br />
 		Heimatsland :
-		<input name="land" list="land" />
+		<input id="liste-laender" name="land" list="land" />
 		<datalist id="land">
 			<option value="Deutschland"/>
 			<option value="Belgien" />
@@ -54,8 +96,9 @@
 	</fieldset>
 
 	<br />
-	<button type="button" name="submit" value="Bestätigen" id="submit" onclick="checkForm(myForm)"/>Bestaetigen</button>
+	<button type="button" name="submit" value="Bestätigen" id="submit" onclick="checkForm(myForm)"/>Formular checken</button>
 
 </form>
+</section>
 </body>
 </html>
