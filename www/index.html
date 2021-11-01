@@ -46,19 +46,17 @@
 
 				if (female){
 					content = "Guten Tag Frau " + (form.userName).value + " !\n" +
-							"Hier ist der Louange Bereich. Drücken Sie auf \"weiter\" um auf der nächsten Seite zu gehen.";
+							"Hier ist der Lounge Bereich. Drücken Sie auf \"weiter\" um auf der nächsten Seite zu gehen.";
 					link.href="page1.html";
 				} else{
 					content = "Guten Tag Herr " + (form.userName).value + " !\n" +
-							"Hier ist de Louanger Bereich. Drücken Sie auf \"weiter\" um auf der nächsten Seite zu gehen.";
+							"Hier ist de Lounge Bereich. Drücken Sie auf \"weiter\" um auf der nächsten Seite zu gehen.";
 					link.href="page1.html";
 				}
 				text.appendChild(document.createTextNode(content)) ;
 				document.body.append(text);
 				document.body.append(link);
 			}
-			//
-
 		}
 
 	</script>

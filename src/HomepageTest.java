@@ -53,7 +53,7 @@ class HomepageTest {
 	}
 
 	@Test
-	void testTitelIndexSeite() {
+	void test_titel_index_seite() {
 		String projectDirectory = System.getProperty("user.dir");
 		String url = "file:///" + projectDirectory + "/www/index.html";
 		driver.get(url);
@@ -84,7 +84,7 @@ class HomepageTest {
 	}
 
 	@Test
-	void testTitelPage1() {
+	void test_titel_page1() {
 		String projectDirectory = System.getProperty("user.dir");
 		String url = "file:///" + projectDirectory + "/www/page1.html";
 		driver.get(url);
@@ -114,7 +114,6 @@ class HomepageTest {
 		driver.get(url);
 		driver.switchTo().alert().accept();
 		assertEquals("", driver.findElement(By.id("nickname")).getText());
-
 	}
 
 	@Test
@@ -130,7 +129,6 @@ class HomepageTest {
 		driver.findElement(By.id("submit")).click();
 		WebElement element= driver.findElement(By.tagName("section"));
 		element.getAttribute("class");
-
 
 		// Die Seite "Page1" soll angezeigt werden, falls auf dem Button gedruckt wird.
 		assertEquals("hide", element.getAttribute("class"));
